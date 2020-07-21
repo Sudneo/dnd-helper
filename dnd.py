@@ -20,8 +20,9 @@ def main():
         # Get description of a specific spell
         spell_info = get_spell_info_by_name(arguments.spell.lower())
         print(json.dumps(spell_info, indent=2, sort_keys=False))
-        with open(arguments.output, "w") as fp:
-            json.dump({'spells': spell_info}, fp, indent=2, sort_keys=False)
+        if arguments.output is not None:
+            with open(arguments.output, "w") as fp:
+                json.dump(spell_info, fp, indent=2, sort_keys=False)
         exit(0)
     if arguments.dndclass is not None:
         spell_list = get_class_spells(arguments.dndclass, arguments.level)
